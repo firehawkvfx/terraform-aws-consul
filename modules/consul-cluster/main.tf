@@ -92,7 +92,7 @@ resource "aws_autoscaling_group" "autoscaling_group" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_launch_configuration" "launch_configuration" {
-  name_prefix   = "${var.cluster_name}-"
+  name_prefix   = "${var.cluster_name}-${var.ami_id}-"
   image_id      = var.ami_id
   instance_type = var.instance_type
   user_data     = var.user_data
