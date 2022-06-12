@@ -36,6 +36,14 @@ resource "aws_autoscaling_group" "autoscaling_group" {
 
   protect_from_scale_in = var.protect_from_scale_in
 
+  instance_refresh { # force refesh of the autoscaling group
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 90
+    }
+    triggers = [var.ami_id]
+  }
+
   tags = concat(
     [
       {
@@ -51,7 +59,6 @@ resource "aws_autoscaling_group" "autoscaling_group" {
     ],
     var.tags,
   )
-}
 
   dynamic "initial_lifecycle_hook" {
     for_each = var.lifecycle_hooks
