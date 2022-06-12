@@ -41,7 +41,7 @@ resource "aws_autoscaling_group" "autoscaling_group" {
     preferences {
       min_healthy_percentage = 90
     }
-    triggers = [var.ami_id]
+    # triggers = [var.ami_id]
   }
 
   tags = concat(
